@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import static com.gildedrose.GildedRose.CONJURED;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@Disabled("new implementation")
 public class ConjuredTest extends GildedRoseSetup {
 
     @Test

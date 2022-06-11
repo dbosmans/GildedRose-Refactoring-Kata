@@ -1,6 +1,7 @@
 package com.gildedrose;
 
 import com.gildedrose.quality.*;
+import com.gildedrose.quality.decrease.ConjuredQualityUpdater;
 import com.gildedrose.quality.decrease.DecreaseQualityUpdater;
 import com.gildedrose.quality.increase.BackStagePassesQualityUpdater;
 import com.gildedrose.quality.increase.IncreaseQualityUpdater;
@@ -39,6 +40,7 @@ class GildedRose {
             case SULFURAS: return new NoopItemQualityUpdater();
             case AGED_BRIE: return new IncreaseQualityUpdater();
             case BACK_STAGE_PASSES: return new BackStagePassesQualityUpdater();
+            case CONJURED: return new ConjuredQualityUpdater();
             default: return new DecreaseQualityUpdater();
         }
     }
