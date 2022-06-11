@@ -1,5 +1,10 @@
 package com.gildedrose;
 
+import com.gildedrose.quality.*;
+import com.gildedrose.quality.decrease.DecreaseQualityUpdater;
+import com.gildedrose.quality.increase.BackStagePassesQualityUpdater;
+import com.gildedrose.quality.increase.IncreaseQualityUpdater;
+
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -15,64 +20,33 @@ class GildedRose {
         this.items = items;
     }
 
+    /*
+    Maybe make stream parallel (expected array size ?)
+     */
     public void updateQuality() {
         Arrays.stream(items)
-            .parallel()
             .filter(Objects::nonNull)
-            .filter(item -> !SULFURAS.equals(item.name))
             .forEach(this::updateItem);
     }
 
     private void updateItem(Item item) {
-        updateItemQuality(item);
+        getUpdateFunction(item.name).updateItemQuality(item);
         updateItemSellIn(item);
     }
 
+    private UpdateQualityFunction getUpdateFunction(String name) {
+        switch (name) {
+            case SULFURAS: return new NoopItemQualityUpdater();
+            case AGED_BRIE: return new IncreaseQualityUpdater();
+            case BACK_STAGE_PASSES: return new BackStagePassesQualityUpdater();
+            default: return new DecreaseQualityUpdater();
+        }
+    }
+
     private void updateItemSellIn(Item item) {
-        item.sellIn = item.sellIn - 1;
+        if (!SULFURAS.equals(item.name)) {
+            item.sellIn = item.sellIn - 1;
+        }
     }
 
-    private void updateItemQuality(Item item) {
-        if (!item.name.equals(AGED_BRIE)
-            && !item.name.equals(BACK_STAGE_PASSES)) {
-            if (item.quality > 0) {
-                item.quality = item.quality - 1;
-            }
-        } else {
-            if (item.quality < 50) {
-                item.quality = item.quality + 1;
-
-                if (item.name.equals(BACK_STAGE_PASSES)) {
-                    if (item.sellIn < 11) {
-                        if (item.quality < 50) {
-                            item.quality = item.quality + 1;
-                        }
-                    }
-
-                    if (item.sellIn < 6) {
-                        if (item.quality < 50) {
-                            item.quality = item.quality + 1;
-                        }
-                    }
-                }
-            }
-        }
-
-        if (item.sellIn < 1) {
-            if (!item.name.equals(AGED_BRIE)) {
-                if (!item.name.equals(BACK_STAGE_PASSES)) {
-                    if (item.quality > 0) {
-                        item.quality = item.quality - 1;
-                    }
-                } else {
-                    item.quality = 0;
-                }
-            } else {
-                if (item.quality < 50) {
-                    item.quality = item.quality + 1;
-                }
-            }
-        }
-
-    }
 }
