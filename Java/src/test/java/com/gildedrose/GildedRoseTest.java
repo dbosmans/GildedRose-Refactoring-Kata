@@ -61,7 +61,6 @@ class GildedRoseTest extends GildedRoseSetup{
     }
 
     @Test
-    @Disabled("fix NPE when item is null")
     void generalItem_null() {
         GildedRose app = new GildedRose(new Item[1]);
         app.updateQuality();
