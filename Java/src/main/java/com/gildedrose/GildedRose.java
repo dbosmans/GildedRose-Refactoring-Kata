@@ -44,9 +44,13 @@ class GildedRose {
     }
 
     private void updateItemSellIn(Item item) {
-        if (!SULFURAS.equals(item.name)) {
+        if (shouldUpdateSellIn(item)) {
             item.sellIn = item.sellIn - 1;
         }
+    }
+
+    private boolean shouldUpdateSellIn(Item item) {
+        return !SULFURAS.equals(item.name);
     }
 
 }
