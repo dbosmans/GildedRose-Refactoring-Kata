@@ -1,11 +1,11 @@
-package com.gildedrose.quality.increase;
+package com.gildedrose.update.increase;
 
 import com.gildedrose.Item;
-import com.gildedrose.quality.UpdateQualityFunction;
+import com.gildedrose.update.AbstractItemUpdater;
 
-public class IncreaseQualityUpdater implements UpdateQualityFunction {
+public class IncreaseQualityUpdater extends AbstractItemUpdater {
 
-    public void updateItemQuality(Item item) {
+     protected void updateItemQuality(Item item) {
 
         // possible bug, line below added to keep current behaviour
         if (item.quality > MAX_QUALITY) return;

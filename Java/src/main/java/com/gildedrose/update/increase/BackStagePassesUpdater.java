@@ -1,8 +1,8 @@
-package com.gildedrose.quality.increase;
+package com.gildedrose.update.increase;
 
 import com.gildedrose.Item;
 
-public class BackStagePassesQualityUpdater extends IncreaseQualityUpdater {
+public class BackStagePassesUpdater extends IncreaseQualityUpdater {
 
     @Override
      public int getQualityStep(Item item) {

@@ -2,7 +2,7 @@ package com.gildedrose;
 
 import org.junit.jupiter.api.Test;
 
-import static com.gildedrose.GildedRose.SULFURAS;
+import static com.gildedrose.update.ItemUpdaterFactory.SULFURAS;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 /*
 According to specs sulfuras should always return 80 ?

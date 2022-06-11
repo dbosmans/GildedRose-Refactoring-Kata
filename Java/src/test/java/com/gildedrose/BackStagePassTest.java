@@ -2,7 +2,7 @@ package com.gildedrose;
 
 import org.junit.jupiter.api.Test;
 
-import static com.gildedrose.GildedRose.BACK_STAGE_PASSES;
+import static com.gildedrose.update.ItemUpdaterFactory.BACK_STAGE_PASSES;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class BackStagePassTest extends GildedRoseSetup {

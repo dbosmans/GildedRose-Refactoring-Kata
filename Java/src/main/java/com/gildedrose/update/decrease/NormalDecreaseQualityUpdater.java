@@ -1,12 +1,12 @@
-package com.gildedrose.quality.decrease;
+package com.gildedrose.update.decrease;
 
 import com.gildedrose.Item;
-import com.gildedrose.quality.UpdateQualityFunction;
+import com.gildedrose.update.AbstractItemUpdater;
 
-public class DecreaseQualityUpdater implements UpdateQualityFunction {
+public class NormalDecreaseQualityUpdater extends AbstractItemUpdater {
 
     @Override
-    public void updateItemQuality(Item item) {
+    protected void updateItemQuality(Item item) {
 
         // possible bug, line below added to keep current behaviour
         if (item.quality < MIN_QUALITY) return;
