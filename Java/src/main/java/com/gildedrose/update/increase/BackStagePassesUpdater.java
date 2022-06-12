@@ -1,19 +1,20 @@
 package com.gildedrose.update.increase;
 
 import com.gildedrose.Item;
+import com.gildedrose.update.QualityConfiguration;
 
 public class BackStagePassesUpdater extends IncreaseQualityUpdater {
     // as per requirements borders should be 11 and 6
     @Override
      protected int getQualityStep(Item item) {
         int qualityStep = 1;
-        if (item.sellIn <= 10) {
+        if (item.sellIn <= QualityConfiguration.BACKSTAGE_PASSES_DOUBLE) {
             qualityStep = 2;
         }
-        if (item.sellIn <= 5) {
+        if (item.sellIn <= QualityConfiguration.BACKSTAGE_PASSES_TRIPLE) {
             qualityStep = 3;
         }
-        if (item.sellIn <= 0) {
+        if (item.sellIn <= QualityConfiguration.SELL_DAY) {
             qualityStep = - item.quality;
         }
         return qualityStep;

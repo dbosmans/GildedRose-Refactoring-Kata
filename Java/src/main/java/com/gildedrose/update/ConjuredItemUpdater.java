@@ -22,6 +22,6 @@ public class ConjuredItemUpdater extends AbstractItemUpdater {
 
     @Override
     protected int getQualityStep(Item item) {
-        return itemUpdater.getQualityStep(item) * 2;
+        return itemUpdater.getQualityStep(item) * QualityConfiguration.CONJURED_FACTOR;
     }
 }

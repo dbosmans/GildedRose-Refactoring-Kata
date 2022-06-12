@@ -9,11 +9,6 @@ public enum ItemUpdaterFactory {
 
     INSTANCE;
 
-    public static final String AGED_BRIE = "Aged Brie";
-    public static final String SULFURAS = "Sulfuras, Hand of Ragnaros";
-    public static final String BACK_STAGE_PASSES = "Backstage passes to a TAFKAL80ETC concert";
-    public static final String CONJURED = "Conjured ";
-
     public ItemUpdater getItemUpdater(Item item) {
 
         if(isLegendary(item)) {
@@ -36,23 +31,23 @@ public enum ItemUpdaterFactory {
     }
 
     private AbstractItemUpdater getItemUpdaterForConjuredItem(Item item) {
-        String conjuredItemName = item.name.substring(CONJURED.length());
+        String conjuredItemName = item.name.substring(QualityConfiguration.CONJURED.length());
         Item originalItem = new Item(conjuredItemName, item.sellIn, item.quality);
         return (AbstractItemUpdater) getItemUpdater(originalItem);
     }
 
     private boolean isConjuredItem(Item item) {
-        return (item.name.startsWith(CONJURED));
+        return (item.name.startsWith(QualityConfiguration.CONJURED));
     }
 
     private boolean isLegendary(Item item) {
-        return SULFURAS.equals(item.name);
+        return QualityConfiguration.SULFURAS.equals(item.name);
     }
     private boolean isAgedBrie(Item item) {
-        return AGED_BRIE.equals(item.name);
+        return QualityConfiguration.AGED_BRIE.equals(item.name);
     }
 
     private boolean isBackStagePass(Item item) {
-        return BACK_STAGE_PASSES.equals(item.name);
+        return QualityConfiguration.BACK_STAGE_PASSES.equals(item.name);
     }
 }

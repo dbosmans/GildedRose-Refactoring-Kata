@@ -4,8 +4,6 @@ import com.gildedrose.Item;
 
 public abstract class AbstractItemUpdater implements ItemUpdater {
 
-    protected int MAX_QUALITY = 50;
-    protected int MIN_QUALITY = 0;
 
     @Override
     public final void updateItem(Item item) {
@@ -22,7 +20,7 @@ public abstract class AbstractItemUpdater implements ItemUpdater {
 
     protected int getQualityStep(Item item) {
         int qualityStep = 1;
-        if (item.sellIn <= 0) {
+        if (item.sellIn <= QualityConfiguration.SELL_DAY) {
             qualityStep = 2;
         }
         return qualityStep;
