@@ -1,7 +1,6 @@
 package com.gildedrose.update.increase;
 
 import com.gildedrose.Item;
-import com.gildedrose.update.QualityConfiguration;
 
 import static com.gildedrose.update.QualityConfiguration.*;
 
@@ -10,16 +9,28 @@ public class BackStagePassesUpdater extends IncreaseQualityUpdater {
     @Override
      protected int getQualityStep(Item item) {
         int qualityStep = 1;
-        if (item.sellIn <= BACKSTAGE_PASSES_DOUBLE) {
+        if (closeToConcertDate(item)) {
             qualityStep = 2;
         }
-        if (item.sellIn <= BACKSTAGE_PASSES_TRIPLE) {
+        if (reallyCloseToConcertDate(item)) {
             qualityStep = 3;
         }
-        if (item.sellIn <= SELL_DAY) {
+        if (concertIsPassed(item)) {
             qualityStep = - item.quality;
         }
         return qualityStep;
+    }
+
+    private boolean closeToConcertDate(Item item) {
+        return item.sellIn <= BACKSTAGE_PASSES_DOUBLE;
+    }
+
+    private boolean reallyCloseToConcertDate(Item item) {
+        return item.sellIn <= BACKSTAGE_PASSES_TRIPLE;
+    }
+
+    private boolean concertIsPassed(Item item) {
+        return item.sellIn <= SELL_DAY;
     }
 
 }

@@ -22,10 +22,14 @@ public abstract class AbstractItemUpdater implements ItemUpdater {
 
     protected int getQualityStep(Item item) {
         int qualityStep = 1;
-        if (item.sellIn <= SELL_DAY) {
+        if (sellDateIsPassed(item)) {
             qualityStep = 2;
         }
         return qualityStep;
+    }
+
+    private boolean sellDateIsPassed(Item item) {
+        return item.sellIn <= SELL_DAY;
     }
 
 }
