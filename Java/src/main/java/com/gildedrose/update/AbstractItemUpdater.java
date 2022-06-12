@@ -2,6 +2,8 @@ package com.gildedrose.update;
 
 import com.gildedrose.Item;
 
+import static com.gildedrose.update.QualityConfiguration.SELL_DAY;
+
 public abstract class AbstractItemUpdater implements ItemUpdater {
 
 
@@ -20,7 +22,7 @@ public abstract class AbstractItemUpdater implements ItemUpdater {
 
     protected int getQualityStep(Item item) {
         int qualityStep = 1;
-        if (item.sellIn <= QualityConfiguration.SELL_DAY) {
+        if (item.sellIn <= SELL_DAY) {
             qualityStep = 2;
         }
         return qualityStep;

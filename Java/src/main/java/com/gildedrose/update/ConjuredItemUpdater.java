@@ -2,6 +2,8 @@ package com.gildedrose.update;
 
 import com.gildedrose.Item;
 
+import static com.gildedrose.update.QualityConfiguration.CONJURED_FACTOR;
+
 public class ConjuredItemUpdater extends AbstractItemUpdater {
 
     private final AbstractItemUpdater itemUpdater;
@@ -22,6 +24,6 @@ public class ConjuredItemUpdater extends AbstractItemUpdater {
 
     @Override
     protected int getQualityStep(Item item) {
-        return itemUpdater.getQualityStep(item) * QualityConfiguration.CONJURED_FACTOR;
+        return itemUpdater.getQualityStep(item) * CONJURED_FACTOR;
     }
 }

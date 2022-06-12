@@ -5,6 +5,8 @@ import com.gildedrose.update.decrease.DecreaseQualityUpdater;
 import com.gildedrose.update.increase.AgedBrieUpdater;
 import com.gildedrose.update.increase.BackStagePassesUpdater;
 
+import static com.gildedrose.update.QualityConfiguration.*;
+
 public enum ItemUpdaterFactory {
 
     INSTANCE;
@@ -31,23 +33,23 @@ public enum ItemUpdaterFactory {
     }
 
     private AbstractItemUpdater getItemUpdaterForConjuredItem(Item item) {
-        String conjuredItemName = item.name.substring(QualityConfiguration.CONJURED.length());
+        String conjuredItemName = item.name.substring(CONJURED.length());
         Item originalItem = new Item(conjuredItemName, item.sellIn, item.quality);
         return (AbstractItemUpdater) getItemUpdater(originalItem);
     }
 
     private boolean isConjuredItem(Item item) {
-        return (item.name.startsWith(QualityConfiguration.CONJURED));
+        return (item.name.startsWith(CONJURED));
     }
 
     private boolean isLegendary(Item item) {
-        return QualityConfiguration.SULFURAS.equals(item.name);
+        return SULFURAS.equals(item.name);
     }
     private boolean isAgedBrie(Item item) {
-        return QualityConfiguration.AGED_BRIE.equals(item.name);
+        return AGED_BRIE.equals(item.name);
     }
 
     private boolean isBackStagePass(Item item) {
-        return QualityConfiguration.BACK_STAGE_PASSES.equals(item.name);
+        return BACK_STAGE_PASSES.equals(item.name);
     }
 }
