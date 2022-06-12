@@ -1,11 +1,16 @@
 package com.gildedrose;
 
+import com.gildedrose.update.QualityConfiguration;
+
 public class GildedRoseSetup {
 
 
+    Item createItem(String itemName, int beforeSellIn, int initialQuality) {
+        return new Item(itemName, QualityConfiguration.SELL_DAY + beforeSellIn, initialQuality) ;
+    }
 
-    Item[] items(Item... items) {
-        return items;
+    GildedRose createGildedRose(Item... items) {
+        return new GildedRose(items);
     }
 
 }

@@ -2,15 +2,15 @@ package com.gildedrose;
 
 import org.junit.jupiter.api.Test;
 
-import static com.gildedrose.update.QualityConfiguration.BACK_STAGE_PASSES;
+import static com.gildedrose.update.QualityConfiguration.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class BackStagePassTest extends GildedRoseSetup {
 
     @Test
     void increasesBy2When10DaysOrLess() {
-        Item item = new Item(BACK_STAGE_PASSES, 11, 3);
-        GildedRose app = new GildedRose(items(item));
+        Item item = new Item(BACK_STAGE_PASSES, BACKSTAGE_PASSES_DOUBLE + 1, 3);
+        GildedRose app = createGildedRose(item);
         app.updateQuality();
         assertEquals(10, item.sellIn);
         assertEquals(4, item.quality);
@@ -24,8 +24,8 @@ public class BackStagePassTest extends GildedRoseSetup {
     }
     @Test
     void increasesBy3When5DaysOrLess() {
-        Item item = new Item(BACK_STAGE_PASSES, 6, 3);
-        GildedRose app = new GildedRose(items(item));
+        Item item = new Item(BACK_STAGE_PASSES, BACKSTAGE_PASSES_TRIPLE + 1, 3);
+        GildedRose app = createGildedRose(item);
         app.updateQuality();
         assertEquals(5, item.sellIn);
         assertEquals(5, item.quality);
@@ -40,8 +40,8 @@ public class BackStagePassTest extends GildedRoseSetup {
 
     @Test
     void dropsToZero() {
-        Item item = new Item(BACK_STAGE_PASSES, 1, 3);
-        GildedRose app = new GildedRose(items(item));
+        Item item = createItem(BACK_STAGE_PASSES, 1, 3);
+        GildedRose app = createGildedRose(item);
         app.updateQuality();
         assertEquals(0, item.sellIn);
         assertEquals(6, item.quality);

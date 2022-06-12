@@ -1,7 +1,6 @@
 package com.gildedrose;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.Disabled;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -9,8 +8,8 @@ class GildedRoseTest extends GildedRoseSetup{
 
     @Test
     void foo() {
-        Item item = new Item("foo", 0, 0) ;
-        GildedRose app = new GildedRose(items(item));
+        Item item = createItem("foo", 0, 0) ;
+        GildedRose app = createGildedRose(item);
         app.updateQuality();
         assertEquals("foo", item.name);
         assertEquals(-1, item.sellIn);
@@ -18,8 +17,8 @@ class GildedRoseTest extends GildedRoseSetup{
     }
     @Test
     void generalItem_onceSellInPassedQualityDegradesDouble() {
-        Item item = new Item("foo", 0, 6);
-        GildedRose app = new GildedRose(items(item));
+        Item item = createItem("foo", 0, 6);
+        GildedRose app = createGildedRose(item);
         app.updateQuality();
         assertEquals(-1, item.sellIn);
         assertEquals(4, item.quality);
@@ -31,8 +30,8 @@ class GildedRoseTest extends GildedRoseSetup{
      */
     @Test
     void generalItem_maxQuality50() {
-        Item item = new Item("foo", 5, 100);
-        GildedRose app = new GildedRose(items(item));
+        Item item = createItem("foo", 5, 100);
+        GildedRose app = createGildedRose(item);
         app.updateQuality();
         assertEquals(4, item.sellIn);
         assertEquals(99, item.quality); // should expect 50 ?
@@ -44,8 +43,8 @@ class GildedRoseTest extends GildedRoseSetup{
      */
     @Test
     void generalItem_minQualityInitallyNegative() {
-        Item item = new Item("foo", 5, -10);
-        GildedRose app = new GildedRose(items(item));
+        Item item = createItem("foo", 5, -10);
+        GildedRose app = createGildedRose(item);
         app.updateQuality();
         assertEquals(4, item.sellIn);
         assertEquals(-10, item.quality);
@@ -53,8 +52,8 @@ class GildedRoseTest extends GildedRoseSetup{
 
     @Test
     void generalItem_minQuality0() {
-        Item item = new Item("foo", 5, 0);
-        GildedRose app = new GildedRose(items(item));
+        Item item = createItem("foo", 5, 0);
+        GildedRose app = createGildedRose(item);
         app.updateQuality();
         assertEquals(4, item.sellIn);
         assertEquals(0, item.quality);

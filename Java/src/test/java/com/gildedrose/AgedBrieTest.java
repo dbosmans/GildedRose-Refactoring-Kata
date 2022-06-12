@@ -9,8 +9,8 @@ public class AgedBrieTest extends GildedRoseSetup {
 
     @Test
     void agedBrieIncreasesQualityBeforeSelByDate() {
-        Item item = new Item(AGED_BRIE, 5, 4);
-        GildedRose app = new GildedRose(items(item));
+        Item item = createItem(AGED_BRIE, 5, 4);
+        GildedRose app = createGildedRose(item);
         app.updateQuality();
         assertEquals(4, item.sellIn);
         assertEquals(5, item.quality);
@@ -22,8 +22,8 @@ public class AgedBrieTest extends GildedRoseSetup {
      */
     @Test
     void increasesQualityAfterSelByDate() {
-        Item item = new Item(AGED_BRIE, -5, 40);
-        GildedRose app = new GildedRose(items(item));
+        Item item = createItem(AGED_BRIE, -5, 40);
+        GildedRose app = createGildedRose(item);
         app.updateQuality();
         assertEquals(-6, item.sellIn);
         assertEquals(42, item.quality);
@@ -31,8 +31,8 @@ public class AgedBrieTest extends GildedRoseSetup {
 
     @Test
     void maxQuality50() {
-        Item item = new Item(AGED_BRIE, 5, 49);
-        GildedRose app = new GildedRose(items(item));
+        Item item = createItem(AGED_BRIE, 5, 49);
+        GildedRose app = createGildedRose(item);
         app.updateQuality();
         assertEquals(4, item.sellIn);
         assertEquals(50, item.quality);
@@ -46,8 +46,8 @@ public class AgedBrieTest extends GildedRoseSetup {
     */
     @Test
     void maxQuality50IllegalInput() {
-        Item item = new Item(AGED_BRIE, 5, 100);
-        GildedRose app = new GildedRose(items(item));
+        Item item = createItem(AGED_BRIE, 5, 100);
+        GildedRose app = createGildedRose(item);
         app.updateQuality();
         assertEquals(4, item.sellIn);
         assertEquals(100, item.quality);
