@@ -32,7 +32,7 @@ public class ConjuredTest extends GildedRoseSetup {
         GildedRose app = createGildedRose(item);
         app.updateQuality();
         assertEquals(-6, item.sellIn);
-        assertEquals(44, item.quality);
+        assertEquals(42, item.quality);
     }
 
     @Test
@@ -51,7 +51,7 @@ public class ConjuredTest extends GildedRoseSetup {
         GildedRose app = createGildedRose(item);
         app.updateQuality();
         assertEquals(4, item.sellIn);
-        assertEquals(11, item.quality);
+        assertEquals(8, item.quality);
 
     }
 
