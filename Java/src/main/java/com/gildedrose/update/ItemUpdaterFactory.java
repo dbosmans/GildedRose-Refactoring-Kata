@@ -1,11 +1,9 @@
 package com.gildedrose.update;
 
 import com.gildedrose.Item;
-import com.gildedrose.update.decrease.ConjuredItemUpdater;
-import com.gildedrose.update.decrease.NormalDecreaseQualityUpdater;
+import com.gildedrose.update.decrease.DecreaseQualityUpdater;
 import com.gildedrose.update.increase.AgedBrieUpdater;
 import com.gildedrose.update.increase.BackStagePassesUpdater;
-import com.gildedrose.update.increase.IncreaseQualityUpdater;
 
 public enum ItemUpdaterFactory {
 
@@ -14,32 +12,40 @@ public enum ItemUpdaterFactory {
     public static final String AGED_BRIE = "Aged Brie";
     public static final String SULFURAS = "Sulfuras, Hand of Ragnaros";
     public static final String BACK_STAGE_PASSES = "Backstage passes to a TAFKAL80ETC concert";
-    public static final String CONJURED = "Conjured";
+    public static final String CONJURED = "Conjured ";
 
-    public AbstractItemUpdater getItemUpdater(Item item) {
+    public ItemUpdater getItemUpdater(Item item) {
 
-        if(shouldNotUpdate(item)) {
-            return new NoopItemUpdater();
-        }
-        if (isAgedBrie(item)) {
-            return new AgedBrieUpdater();
-        }
-        if (isBackStagePass(item)) {
-            return new BackStagePassesUpdater();
+        if(isLegendary(item)) {
+            return  new LegendaryItemUpdater();
         }
         if (isConjuredItem(item)) {
-            return new ConjuredItemUpdater();
+            return new ConjuredItemUpdater(getItemUpdaterForConjuredItem(item));
         }
+       return getUpdater(item);
+    }
 
-        return new NormalDecreaseQualityUpdater();
+    private ItemUpdater getUpdater(Item item) {
+        if (isAgedBrie(item)) {
+           return  new AgedBrieUpdater();
+        }
+        if (isBackStagePass(item)) {
+           return  new BackStagePassesUpdater();
+        }
+        return new DecreaseQualityUpdater();
+    }
 
+    private AbstractItemUpdater getItemUpdaterForConjuredItem(Item item) {
+        String conjuredItemName = item.name.substring(CONJURED.length());
+        Item originalItem = new Item(conjuredItemName, item.sellIn, item.quality);
+        return (AbstractItemUpdater) getItemUpdater(originalItem);
     }
 
     private boolean isConjuredItem(Item item) {
-        return CONJURED.equals(item.name);
+        return (item.name.startsWith(CONJURED));
     }
 
-    private boolean shouldNotUpdate(Item item) {
+    private boolean isLegendary(Item item) {
         return SULFURAS.equals(item.name);
     }
     private boolean isAgedBrie(Item item) {

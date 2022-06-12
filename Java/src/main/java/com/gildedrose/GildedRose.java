@@ -23,10 +23,10 @@ class GildedRose {
     }
 
     private void updateItem(Item item) {
-        getUpdateFunction(item).updateItem(item);
+        getItemUpdater(item).updateItem(item);
     }
 
-    private AbstractItemUpdater getUpdateFunction(Item item ) {
+    private ItemUpdater getItemUpdater(Item item ) {
         return ItemUpdaterFactory.INSTANCE.getItemUpdater(item);
     }
 

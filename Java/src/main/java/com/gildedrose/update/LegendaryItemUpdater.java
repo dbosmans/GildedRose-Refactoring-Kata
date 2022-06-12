@@ -2,10 +2,10 @@ package com.gildedrose.update;
 
 import com.gildedrose.Item;
 
-public class NoopItemUpdater extends AbstractItemUpdater {
+public class LegendaryItemUpdater extends AbstractItemUpdater {
 
     @Override
-    protected void updateItemQuality(Item item) {
+    public void updateItemQuality(Item item, int qualityStep) {
         //noop as noop should
     }
 

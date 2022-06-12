@@ -9,15 +9,16 @@ public abstract class AbstractItemUpdater implements ItemUpdater {
 
     @Override
     public final void updateItem(Item item) {
-        updateItemQuality(item);
+        int step = getQualityStep(item);
+        updateItemQuality(item, step);
         updateItemSellIn(item);
     }
+
+     protected abstract void updateItemQuality(Item item, int step);
 
     protected void updateItemSellIn(Item item) {
         item.sellIn = item.sellIn - 1;
     }
-
-    protected abstract void updateItemQuality(Item item);
 
     protected int getQualityStep(Item item) {
         int qualityStep = 1;
